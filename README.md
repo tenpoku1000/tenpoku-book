@@ -1,5 +1,7 @@
 
-## x64 UEFI 対応 OS 自作入門
+## x64 UEFI 対応 OS 自作入門 ～実機で動作する OS を作ってみよう～
+
+* [GitHub リポジトリ](https://github.com/tenpoku1000/tenpoku-book)
 
 ## 市川 真一：[著]
 
@@ -18,3 +20,4 @@ TODO
 ![CC BY 4.0](https://i.creativecommons.org/l/by/4.0/88x31.png)
 
 この作品は[クリエイティブ・コモンズ 表示 4.0 国際 ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)の下に提供されています。
+
