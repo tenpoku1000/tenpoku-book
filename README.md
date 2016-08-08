@@ -3,8 +3,8 @@
 
 ## 市川 真一：[著]
 
-[@tenpoku1000](https://twitter.com/tenpoku1000)
-suigun1000@gmail.com
+* [@tenpoku1000](https://twitter.com/tenpoku1000)
+* suigun1000@gmail.com
 
 ## まえがき
 
@@ -18,4 +18,3 @@ TODO
 ![CC BY 4.0](https://i.creativecommons.org/l/by/4.0/88x31.png)
 
 この作品は[クリエイティブ・コモンズ 表示 4.0 国際 ライセンス](https://creativecommons.org/licenses/by/4.0/deed.ja)の下に提供されています。
-
