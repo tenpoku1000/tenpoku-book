@@ -1,7 +1,10 @@
 
 ## x64 UEFI 対応 OS 自作入門
 
-## 市川 真一：[著] [@tenpoku1000](https://twitter.com/tenpoku1000) suigun1000@gmail.com
+## 市川 真一：[著]
+
+[@tenpoku1000](https://twitter.com/tenpoku1000)
+suigun1000@gmail.com
 
 ## まえがき
 
