@@ -1,7 +1,8 @@
 
 ## x64 UEFI 対応 OS 自作入門 ～実機で動作する OS を作ってみよう～
 
-* [GitHub リポジトリ](https://github.com/tenpoku1000/tenpoku-book)
+* [本書の GitHub リポジトリ](https://github.com/tenpoku1000/tenpoku-book)
+* [OS 開発予定(基本機能)](https://gist.github.com/tenpoku1000/717524125c38cbdc2271817ae4aa57d2)
 
 ## 市川 真一：[著]
 

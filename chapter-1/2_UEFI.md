@@ -1,5 +1,18 @@
 
 ## 1.2 UEFI
 
-TODO
+この節では、OS の基盤であるカーネルを UEFI から起動(ディスクからカーネルをメモリに読み込み、実行)する方法を主に解説します。
+
+* カーネルは UEFI アプリとして作る([1.2.1 初めての UEFI アプリ](chapter-1/2-1_UEFI_Start.md))
+* 2 種類のパーティション・テーブルについて解説[1.2.2 GPT と MBR](chapter-1/2-2_UEFI_MBR.md)
+* OS から UEFI セットアップ画面への切り替え方法[1.2.3 UEFI セットアップ画面](chapter-1/2-3_UEFI_SetupScreen.md)
+* アウトラインフォントの描画を試みる([1.2.4 FreeType の利用](chapter-1/2-4_UEFI_FreeType_MSVC.md))
+* 自作 OS で UEFI セキュアブートに対応する方法([1.2.5 UEFI セキュアブート](chapter-1/2-5_UEFI_SecureBoot.md))
+
+「1.3 節 ～ 1.5 節」にて、UEFI アプリとしての動作を離れ、具体的に OS として
+動作するための基礎的な機能を整備します。
+
+* [1.3 UART 経由のカーネルデバッグ](chapter-1/3_Debug.md)
+* [1.4 PS/2 キーボード・マウス](chapter-1/4_PS2.md)
+* [1.5 ウインドウシステム](chapter-1/5_Window_System.md)
 
