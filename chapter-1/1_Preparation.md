@@ -51,7 +51,7 @@ TODO：本書を書き進めるうちに前提知識や機材、約束事が修�
 
 　GitHub で公開しています。本書の本文中で個別のリポジトリの URL を提示します。
 
-* [GitHub URL](https://github.com/tenpoku1000)
+https://github.com/tenpoku1000
 
 　本書の本文中で扱うコード片は、基本的に GitHub で公開しているコードの一部を切り出したものです。
 
