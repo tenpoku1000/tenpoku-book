@@ -5,6 +5,12 @@
 
 ## 1.2.3.1 Windows 10 で UEFI セットアップ画面へ切り替える操作方法
 
+　Windows 10 1607(Anniversary Update)以降では、管理者権限でコマンドプロンプトを起動し、以下のコマンドを実行する方法も使用可能です。PC が再起動しますので、作業中のファイルを保存するなど、事前に必要な操作を済ませておいてください。
+
+    shutdown /r /fw /t 0
+
+　以下では、GUI による操作方法を解説します。
+
 1.**「Shift キー」を押しながら**「再起動」をクリックします。
 
 ![UEFI_Win_0.png](images/2-3/UEFI_Win_0.png)
@@ -29,7 +35,7 @@
 
 ## 1.2.3.2 UEFI アプリで UEFI セットアップ画面へ切り替える実装方法
 
-　UEFI セットアップ画面への画面遷移を行う UEFI アプリ UEFI_SetupScreen をダウンロードして、README.md に書かれた実行方法の手順に従って実行させてみてください。アプリ起動後に任意のキーを押すと、UEFI セットアップ画面へ切り替わります。未対応の環境では、システムがリセットされるだけです。
+　UEFI セットアップ画面への画面遷移を行う UEFI アプリ UEFI_SetupScreen をダウンロードして、README.md に書かれた実行方法の手順に従って実行させてみてください。アプリ起動後に任意のキーを押すと、UEFI セットアップ画面へ切り替わります。未対応の環境では、PC がリセットされるだけです。
 
 [UEFI アプリ UEFI_SetupScreen](https://github.com/tenpoku1000/UEFI_SetupScreen)
 
@@ -37,7 +43,7 @@
 
 [UEFI アプリ UEFI_SetupScreen の efi_main.c](https://github.com/tenpoku1000/UEFI_SetupScreen/blob/master/src/efi_main.c)
 
-　efi_main 関数ではシステムは最後に必ずリセットされますが、UEFI セットアップ画面への画面遷移の機能が有効な場合は、その機能を呼び出すための処理を実行します。
+　efi_main 関数では PC は最後に必ずリセットされますが、UEFI セットアップ画面への画面遷移の機能が有効な場合は、その機能を呼び出すための処理を実行します。
 
     EFI_STATUS efi_main(EFI_HANDLE image_handle, EFI_SYSTEM_TABLE* system_table)
     {
@@ -60,6 +66,8 @@
     }
 
 　UEFI 変数 OsIndicationsSupported と、定数 EFI_OS_INDICATIONS_BOOT_TO_FW_UI とビット演算の論理積をとることで、これが真の場合は UEFI セットアップ画面への画面遷移の機能が有効です。偽の場合は、UEFI セットアップ画面への画面遷移の機能が無効です。SandyBridge/IvyBridge 世代向け GIGABYTE 製マザーボード GA-Z77-D3H の初期の UEFI では、UEFI セットアップ画面への画面遷移の機能が無効でした。
+
+　RT->GetVariable() の第 2 引数の GUID に EfiGlobalVariable のポインタをセットしています。UEFI 変数の読み書きには UEFI 変数名と GUID を組み合わせることで、一意な UEFI 変数を特定する仕組みになっています。ここでは UEFI の規格で定められた UEFI 変数を特定するため、UEFI の規格で定められた GUID をセットするようにしています。EfiGlobalVariable という名前は規格で決まっているものではなく、利用するライブラリによって異なる名前になる可能性があります。
 
 | UEFI 関数         | 機能              | 引数            | 型          |
 | ----------------- | ----------------- | --------------- | ----------- |
@@ -149,7 +157,7 @@
         return status;
     }
 
-この後でシステムをリセットすることで、UEFI 変数 OsIndications が UEFI で参照され、UEFI セットアップ画面への画面遷移が実行されます。UEFI セットアップ画面への画面遷移の機能が無効な機種では、単にシステムがリセットされるだけです。
+この後で PC をリセットすることで、UEFI 変数 OsIndications が UEFI で参照され、UEFI セットアップ画面への画面遷移が実行されます。UEFI セットアップ画面への画面遷移の機能が無効な機種では、単に PC がリセットされるだけです。
 
         reset_system(EFI_SUCCESS);
 
