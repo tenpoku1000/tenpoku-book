@@ -13,23 +13,23 @@
 
 1.**「Shift キー」を押しながら**「再起動」をクリックします。
 
-![UEFI_Win_0.png](images/2-3/UEFI_Win_0.png)
+![再起動](images/2-3/UEFI_Win_0.png)
 
 2.「トラブルシューティング」をクリックします。
 
-![UEFI_Win_1.png](images/2-3/UEFI_Win_1.png)
+![トラブルシューティング](images/2-3/UEFI_Win_1.png)
 
 3.「詳細オプション」をクリックします。
 
-![UEFI_Win_2.png](images/2-3/UEFI_Win_2.png)
+![詳細オプション](images/2-3/UEFI_Win_2.png)
 
 4.「UEFI ファームウェアの設定」をクリックします。
 
-![UEFI_Win_3.png](images/2-3/UEFI_Win_3.png)
+![UEFI ファームウェアの設定](images/2-3/UEFI_Win_3.png)
 
 5.「再起動ボタン」をクリックします。
 
-![UEFI_Win_4.png](images/2-3/UEFI_Win_4.png)
+![再起動ボタン](images/2-3/UEFI_Win_4.png)
 
 6.UEFI セットアップ画面が表示されます。
 
