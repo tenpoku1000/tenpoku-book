@@ -1,7 +1,7 @@
 
-## 1.7 参考文献・資料
+## 4.3 参考文献・資料
 
-### [1.2.1 初めての UEFI アプリ](2-1_UEFI_Start.md)
+### [4.1.1 初めての UEFI アプリ](chapter-4/1-1_UEFI_Start.md)
 
 * Windows7でもFastBootが効くってホント？ - 週刊アスキー
 http://weekly.ascii.jp/elem/000/000/141/141011/
@@ -11,23 +11,23 @@ http://weekly.ascii.jp/elem/000/000/141/141011/
 * Unified Extensible Firmware Interface Specification Version 2.6 January, 2016
 http://www.uefi.org/sites/default/files/resources/UEFI%20Spec%202_6.pdf
 
-### [1.2.2 GPT と MBR](2-2_UEFI_MBR.md)
+### [4.1.2 GPT と MBR](chapter-4/1-2_UEFI_MBR.md)
 
 　前の項と同様。
 
-### [1.2.3 UEFI セットアップ画面](2-3_UEFI_SetupScreen.md)
+### [4.1.3 UEFI セットアップ画面](chapter-4/1-3_UEFI_SetupScreen.md)
 
 * Tech TIPS：Windows 10で素早くUEFIの設定画面を起動する - ＠IT
 http://www.atmarkit.co.jp/ait/articles/1610/28/news021.html
 * GUIDとは - IT用語辞典 Weblio辞書
 http://www.weblio.jp/content/GUID
 
-### [1.2.4 FreeType の利用](chapter-1/2-4_UEFI_FreeType_MSVC.md)
+### [4.1.4 FreeType の利用](chapter-4/1-4_UEFI_FreeType_MSVC.md)
 
 * FreeType使用記録
 http://hp.vector.co.jp/authors/VA028002/freetype.html
 
-### [1.2.5 UEFI セキュアブート](2-5_UEFI_SecureBoot.md)
+### [4.1.5 UEFI セキュアブート](chapter-4/1-5_UEFI_SecureBoot.md)
 
 * Microsoft UEFI CA の署名ポリシーが更新されました – Windows ハードウェア認定ブログ
 https://blogs.msdn.microsoft.com/windows_hardware_certification_ja/2013/12/03/microsoft-uefi-ca/
