@@ -8,12 +8,12 @@
     * [2.4 字句解析](chapter-2/4_Token.md)
     * [2.5 構文解析](chapter-2/5_Parse_tree.md)
     * [2.6 意味解析](chapter-2/6_Semantic_analysis.md)
-    * [2.7 中間コード(WebAssembly)生成](chapter-2/7_Wasm.md)
+    * [2.7 中間コード\(WebAssembly\)生成](chapter-2/7_Wasm.md)
     * [2.8 x64 コード生成](chapter-2/8_x64_code.md)
     * [2.9 デバッグとテストコード](chapter-2/9_Debug_test.md)
     * [2.10 改善を検討すべき点](chapter-2/10_Consideration.md)
     * [2.11 参考文献・資料](chapter-2/11_Bibliography.md)
-* 第3章：クロス開発環境を作る(1)
+* 第3章：クロス開発環境を作る\(1\)
 * [第4章：UEFI アプリを自作開発環境でビルドする](chapter-4/README.md)
     * [4.1 UEFI](chapter-4/1_UEFI.md)
         * [4.1.1 初めての UEFI アプリ](chapter-4/1-1_UEFI_Start.md)
@@ -23,7 +23,7 @@
         * [4.1.5 UEFI セキュアブート](chapter-4/1-5_UEFI_SecureBoot.md)
     * [4.2 まとめ](chapter-4/2_Summary.md)
     * [4.3 参考文献・資料](chapter-4/3_Bibliography.md)
-* 第5章：クロス開発環境を作る(2)
+* 第5章：クロス開発環境を作る\(2\)
 * 第6章：シングルタスク OS をデバッグ可能にする
 * 第7章：対応するデバイスを増やす
 * 第8章：マルチタスク/マルチコア対応
