@@ -1,6 +1,6 @@
 * [まえがき](README.md)
 * [第1章：準備](chapter-1/README.md)
-* [第2章：32 ビット整数式の x64 JIT コンパイラを試作する](chapter-2/README.md)
+* [第2章：32 ビット整数式の x64 JIT コンパイラを試作する](/chapter-2/README.md)
 * * [2.1 コンパイラを自作する理由](chapter-2/1_Reason.md)
   * [2.2 全体の処理の流れ](chapter-2/2_Flow.md)
   * [2.3 コーディングの方針](chapter-2/3_Policy.md)
