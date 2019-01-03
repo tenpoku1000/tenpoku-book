@@ -201,13 +201,13 @@ static bool search_parse_tree(TP_SYMBOL_TABLE* symbol_table, TP_PARSE_TREE* pars
 確認してエラーの場合にコンパイルを停止します。この場合、構文解析と意味解析で処理内容に相違があるということですから、
 内部コンパイラ・エラー(ICE: Internal Compiler Error)となります。
 
-中間コード生成で、最後の文であること示す情報が必要なため、記号表(TP_SYMBOL_TABLE 構造体)の TP_PARSE_TREE* member_last_statement; に、以下の文法の場合に部分木を
+中間コード生成で、最後の文であること示す情報が必要なため、記号表(TP_SYMBOL_TABLE 構造体)の TP_PARSE_TREE\* member_last_statement; に、以下の文法の場合に部分木を
 代入するようにしています。複数の文があるソースコードをコンパイルすると何度も代入されますが、最後に代入された部分木が、最後の文として中間コード生成で参照されます。
 
 ```
 Statement -> Type? variable '=' Expression ';'
 ```
 
-ハッシュ表に登録する名前は、トークンの文字列をポインタで参照していますので、SAME_HASH_DATA 構造体の uint8_t* member_string; は free しないように注意する必要があります。
+ハッシュ表に登録する名前は、トークンの文字列をポインタで参照していますので、SAME_HASH_DATA 構造体の uint8_t\* member_string; は free しないように注意する必要があります。
 トークン列のメモリ解放の際に、ハッシュ表に登録した名前の実体が解放されます。
 

@@ -36,9 +36,9 @@ Type -> int32_t
 
 構文木は、
 [int_calc_compiler/src/lib/tp_compiler/tp_compiler.h](https://github.com/tenpoku1000/int_calc_compiler/blob/master/src/lib/tp_compiler/tp_compiler.h)
-の記号表(TP_SYMBOL_TABLE 構造体)の TP_PARSE_TREE* member_tp_parse_tree; に格納され、
+の記号表(TP_SYMBOL_TABLE 構造体)の TP_PARSE_TREE\* member_tp_parse_tree; に格納され、
 意味解析(tp_semantic_analysis.c)と、中間コード生成(tp_make_wasm.c)で参照されます。構文木を表す TP_PARSE_TREE 構造体は、以下の通りです。
-TP_PARSE_TREE_GRAMMER member_grammer; に文法の種類、size_t member_element_num; に文法に含まれる要素数、TP_PARSE_TREE_ELEMENT* member_element; に文法の要素が格納されます。
+TP_PARSE_TREE_GRAMMER member_grammer; に文法の種類、size_t member_element_num; に文法に含まれる要素数、TP_PARSE_TREE_ELEMENT\* member_element; に文法の要素が格納されます。
 文法の要素は、トークン・構文木の他の部分(部分木と呼びます)・文法の要素の末尾 TP_PARSE_TREE_TYPE_NULL が含まれます。文法の種類は、部分木の種類であるとも言えます。
 
 ```
@@ -518,7 +518,7 @@ TP_PARSE_TREE* tmp_expression_1 = MAKE_PARSE_SUBTREE(
 make_parse_subtree 関数では、構文木の部分木のメモリ領域を確保し、引数で渡される TP_PARSE_TREE_ELEMENT 構造体の配列などを、確保したメモリ領域にコピーしています。
 また、文法の要素の最後に、文法の要素の末尾を示す TP_PARSE_TREE_TYPE_NULL を追加します。部分木だけでなく、トークンについてもポインタがコピーされるだけですから、
 トークンの実体は字句解析で確保したメモリ領域であることに注意する必要があります。トークンのメモリ領域を解放する場合は、
-記号表(TP_SYMBOL_TABLE 構造体)の TP_TOKEN* member_tp_token; のメモリ領域を解放する必要があります。その他の領域のポインタを free してしまうと多重解放になり、
+記号表(TP_SYMBOL_TABLE 構造体)の TP_TOKEN\* member_tp_token; のメモリ領域を解放する必要があります。その他の領域のポインタを free してしまうと多重解放になり、
 不具合が生じる原因になります。
 
 ```

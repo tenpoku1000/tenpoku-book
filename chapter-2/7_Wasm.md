@@ -319,8 +319,8 @@ i32.const 100 (0x64): 1
 WebAssembly は可変長の項目が多いため、少しずつファイルに書いていったら出力するのは楽なのですが、
 すべてメモリ上で組み立てて完成した WebAssembly のモジュールをファイルに出力します。構文解析から JIT 実行まで、メモリ上で処理を完結させたいためです。
 記号表(TP_SYMBOL_TABLE 構造体)の TP_WASM_MODULE member_wasm_module; で組み立てます。WebAssembly のモジュールは、1 つ以上のセクションで構成されているため、
-TP_WASM_MODULE_SECTION** member_section; でセクション単位に組み立てます。組み立てた全セクションを結合して、
-TP_WASM_MODULE_CONTENT* member_module_content; に WebAssembly バイナリ表現が構築されます。
+TP_WASM_MODULE_SECTION\*\* member_section; でセクション単位に組み立てます。組み立てた全セクションを結合して、
+TP_WASM_MODULE_CONTENT\* member_module_content; に WebAssembly バイナリ表現が構築されます。
 
 ```
 typedef struct tp_wasm_module_{
@@ -712,10 +712,10 @@ uint32_t tp_encode_ui32leb128(uint8_t* buffer, size_t offset, uint32_t value)
 WebAssembly の Code セクションのローカル変数の数に、意味解析で記号表(TP_SYMBOL_TABLE 構造体)の member_var_count に保存していた値を使います。
 
 コンパイル対象のソースコードの最後の文で、set_local と get_local の組み合わせの代わりに tee_local を生成します。生成されるコードを短くし、スタックに計算結果を保存できます。
-意味解析で記号表の TP_PARSE_TREE* member_last_statement; に保存していた文を、最後の文として参照します。
+意味解析で記号表の TP_PARSE_TREE\* member_last_statement; に保存していた文を、最後の文として参照します。
 set_local/get_local/tee_local で必要なローカル変数の番号は、意味解析が出力したハッシュ表で、構文木に含まれる名前を検索することで、取得できます。
 記号表の member_code_body_size に生成した WebAssembly 命令のサイズを加算していくことで、WebAssembly の Code セクションのサイズを計算します。
-また、記号表の uint8_t* member_code_section_buffer; に WebAssembly の Code セクションを生成していくようになっています。複数の関数に処理が分かれているためです。
+また、記号表の uint8_t\* member_code_section_buffer; に WebAssembly の Code セクションを生成していくようになっています。複数の関数に処理が分かれているためです。
 
 ```
     // Grammer: Statement -> Type? variable '=' Expression ';'
