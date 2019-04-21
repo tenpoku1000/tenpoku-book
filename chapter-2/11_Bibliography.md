@@ -91,6 +91,9 @@ https://www.wdic.org/w/TECH/LEB128
 
 ### [2.8 x64 コード生成](chapter-2/8_x64_code.md)
 
+x64 アセンブリーの概要 | iSUS  
+https://www.isus.jp/others/introduction-to-x64-assembly/
+
 x64 の 64 ビットモードのエンコーディング概略  
 https://gist.github.com/tenpoku1000/24c249e32c512611c079ce87a59a6a52
 
@@ -107,14 +110,11 @@ https://gist.github.com/tenpoku1000/24c249e32c512611c079ce87a59a6a52
 x64 ソフトウェア規約 | Microsoft Docs  
 https://docs.microsoft.com/ja-jp/cpp/build/x64-software-conventions?view=vs-2017
 
-レジスタの使用 | Microsoft Docs  
-https://docs.microsoft.com/ja-jp/cpp/build/register-usage?view=vs-2017
+x64 呼び出し規則 | Microsoft Docs  
+https://docs.microsoft.com/ja-jp/cpp/build/x64-calling-convention?view=vs-2017
 
-パラメーターの引き渡し | Microsoft Docs  
-https://docs.microsoft.com/ja-jp/cpp/build/parameter-passing?view=vs-2017
-
-スタック割り当て | Microsoft Docs  
-https://docs.microsoft.com/ja-jp/cpp/build/stack-allocation?view=vs-2017
+x64 スタック使用量 | Microsoft Docs  
+https://docs.microsoft.com/ja-jp/cpp/build/stack-usage?view=vs-2017
 
 プロローグとエピローグ | Microsoft Docs  
 https://docs.microsoft.com/ja-jp/cpp/build/prolog-and-epilog?view=vs-2017
@@ -123,7 +123,7 @@ Gamasutra - In-depth: Windows x64 ABI: Stack frames
 https://www.gamasutra.com/view/news/178446/Indepth_Windows_x64_ABI_Stack_frames.php
 
 Windows Anti-Debug Reference まとめ その1 - Twitterに書ききれないこと  
-http://pinksawtooth.hatenablog.com/entry/2015/08/12/013616
+https://web.archive.org/web/20180804094336/http://pinksawtooth.hatenablog.com/entry/2015/08/12/013616
 
 Saving Space When Saving Space - emsea  
 https://emsea.github.io/2018/06/03/smaller-bss/
@@ -140,8 +140,8 @@ Jr.,Henry S. Warren 著
 翻訳：滝沢 徹, 鈴木 貢, 赤池 英夫, 葛 毅, 藤波 順久  
 エスアイビー・アクセス 2005/06 初版 第3刷
 
-[reverse-engineering] objdumpを使用したフラットバイナリファイルの逆アセンブル [disassembly] | CODE Q&A 問題解決 [日本語]  
-https://code.i-harness.com/ja/q/da0fbf
+linux - How do I disassemble raw x86 code? - Stack Overflow  
+https://stackoverflow.com/questions/1737095/how-do-i-disassemble-raw-x86-code/34424146
 
 Writing WebAssembly By Hand  
 https://blog.scottlogic.com/2018/04/26/webassembly-by-hand.html
