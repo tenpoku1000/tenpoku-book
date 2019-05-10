@@ -3,7 +3,7 @@
 
 * [本書の GitHub リポジトリ](https://github.com/tenpoku1000/tenpoku-book)
 * [OS 開発予定(基本機能)](https://gist.github.com/tenpoku1000/717524125c38cbdc2271817ae4aa57d2)
-* [OS・コンパイラ・Web ブラウザ開発のためのメモ](https://gist.github.com/tenpoku1000/eea7139aca37c5394ef6efb09130338b)
+* [コンパイラ・IDE・OS・VMM・IME の開発のためのメモ](https://gist.github.com/tenpoku1000/eea7139aca37c5394ef6efb09130338b)
 
 ### 市川 真一：[著]
 
