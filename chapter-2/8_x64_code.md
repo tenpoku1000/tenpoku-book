@@ -276,7 +276,7 @@ tee_local value1 -> スタックの状態：9   (計算結果)
 1. get_wasm_export_code_section 関数で、Export セクション -> Function セクション -> Type セクション -> Code セクションの順に WebAssembly の内容を検査して、
 Code セクションへのポインタと、返り値の型を取得します。C 言語の int32_t calc(void) 関数相当が、Export セクションで外部に公開されていることを前提にしています。
 
-2. wasm_stack_init 関数で、コンパイラの WebAssembly を解釈するためのスタックを初期化します。
+2. wasm_stack_and_use_register_init 関数で、コンパイラの WebAssembly を解釈するためのスタックを初期化します。
 
 3. tp_encode_allocate_stack 関数で、関数のプロローグのコード生成を行います。「2.8.5 関数のプロローグ：ローカル変数と一時変数の x64 のスタックへの確保」で説明します。
 
@@ -342,7 +342,7 @@ static uint32_t convert_section_code_content2x64(TP_SYMBOL_TABLE* symbol_table, 
 
 (中略)
 
-    if ( ! wasm_stack_init(symbol_table, wasm_code_body_buffer, wasm_code_body_size)){
+    if ( ! wasm_stack_and_use_register_init(symbol_table, wasm_code_body_buffer, wasm_code_body_size)){
 
         TP_PUT_LOG_MSG_TRACE(symbol_table);
 
