@@ -8,7 +8,7 @@
 ### 市川 真一：[著]
 
 * [@tenpoku1000](https://twitter.com/tenpoku1000)
-* suigun1000@gmail.com
+* tenpoku1000@outlook.com
 
 ### まえがき
 
