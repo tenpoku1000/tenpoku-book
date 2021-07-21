@@ -8,8 +8,8 @@
 
 この節は、WebAssembly の公式資料を参照しながら、読むようにすると理解が進むと思います。
 
-Binary Encoding - WebAssembly  
-https://webassembly.org/docs/binary-encoding/
+Binary Format — WebAssembly  
+https://webassembly.github.io/spec/core/binary/index.html
 
 WebAssembly Specifications  
 https://webassembly.github.io/spec/
@@ -21,13 +21,27 @@ https://ukyo.github.io/wasm-usui-book/webroot/get-started-webassembly.html
 
 ### 2.7.1 既存のツール wabt を使って、WebAssembly を知る
 
-Microsoft Store から、WSL の Ubuntu をインストールしてください。この節の執筆時には Ubuntu 18.04 LTS を利用しました。WSL の Ubuntu で、以下の手順で wabt をビルドします。
+Microsoft Store から、WSL の Ubuntu をインストールしてください。この節の執筆時には Ubuntu 20.04 LTS を利用しました。WSL の Ubuntu で、以下の手順で wabt をビルドします。
 インストールされていないコマンドがあると指摘された場合は、その都度インストールするようにしてください。
+同じ版を試したい場合は、git checkout してください。ビルドエラーになった場合に、「apt-file search ファイル名」でパッケージを探すと、問題解決のヒントが得られる可能性があります。
+Ubuntu のパッケージが壊れていて作業の続行ができなくなった場合は、Windows の「設定 - アプリ - アプリと機能 - Ubuntu 20.04 LTS - 詳細オプション」のリセット・ボタンを押下してください。
 
 ```
+$ sudo apt update
+$ sudo apt upgrade -fy
+$ sudo apt autoremove
+$ sudo apt install -fy apt-file
+$ sudo apt-file update
+$ 
+$ sudo apt install cmake clang -fy
 $ git clone --recursive https://github.com/WebAssembly/wabt
 $ cd wabt
-$ make
+$ git show -s --format=%H
+7eadc12f71483b1d9d8cf16877efa33361d1e493
+$ 
+$ cd build 
+$ cmake .. 
+$ cmake --build .
 ```
 
 例として、以下のようなソースコードをコンパイルできることを前提としています。
@@ -125,18 +139,18 @@ $ ./wabt/bin/wasm2wat calc.wasm > calc2.wat
     i32.add
     i32.const 3
     i32.mul
-    set_local 0
+    local.set 0
     i32.const 2
     i32.const 3
-    get_local 0
+    local.get 0
     i32.mul
     i32.add
-    set_local 1
-    get_local 1
+    local.set 1
+    local.get 1
     i32.const 100
     i32.add
-    tee_local 0)
-  (table (;0;) 0 anyfunc)
+    local.tee 0)
+  (table (;0;) 0 funcref)
   (memory (;0;) 1)
   (export "memory" (memory 0))
   (export "calc" (func 0)))
@@ -180,38 +194,40 @@ Sections:
 
 Section Details:
 
-Type:
+Type[1]:
  - type[0] () -> i32
-Function:
+Function[1]:
  - func[0] sig=0 <calc>
-Table:
- - table[0] type=anyfunc initial=0
-Memory:
+Table[1]:
+ - table[0] type=funcref initial=0
+Memory[1]:
  - memory[0] pages: initial=1
-Export:
+Export[2]:
  - memory[0] -> "memory"
  - func[0] <calc> -> "calc"
+Code[1]:
+ - func[0] size=32 <calc>
 
 Code Disassembly:
 
-000034 <calc>:
+000035 func[0] <calc>:
  000036: 02 7f                      | local[0..1] type=i32
  000038: 41 01                      | i32.const 1
  00003a: 41 02                      | i32.const 2
  00003c: 6a                         | i32.add
  00003d: 41 03                      | i32.const 3
  00003f: 6c                         | i32.mul
- 000040: 21 00                      | set_local 0
+ 000040: 21 00                      | local.set 0
  000042: 41 02                      | i32.const 2
  000044: 41 03                      | i32.const 3
- 000046: 20 00                      | get_local 0
+ 000046: 20 00                      | local.get 0
  000048: 6c                         | i32.mul
  000049: 6a                         | i32.add
- 00004a: 21 01                      | set_local 1
- 00004c: 20 01                      | get_local 1
+ 00004a: 21 01                      | local.set 1
+ 00004c: 20 01                      | local.get 1
  00004e: 41 e4 00                   | i32.const 100
  000051: 6a                         | i32.add
- 000052: 22 00                      | tee_local 0
+ 000052: 22 00                      | local.tee 0
  000054: 0b                         | end
 
 Contents of section Type:
@@ -239,12 +255,12 @@ Contents of section Code:
 wabt の wasm-opcodecnt コマンドを使って、WebAssembly バイナリ表現 calc.wasm ファイルの内容をダンプしてみます。バイナリを構成する部品を細かく見ることができます。
 
 ```
-$ ./wabt/bin/wasm-opcodecnt -v calc.wasm > calc_op.txt
+$ ./wabt/bin/wasm-opcodecnt -v calc.wasm 2> calc_op.txt >> calc_op.txt
 
 BeginModule(version: 1)
   BeginTypeSection(5)
     OnTypeCount(1)
-    OnType(index: 0, params: [], results: [i32])
+    OnFuncType(index: 0, params: [], results: [i32])
   EndTypeSection
   BeginFunctionSection(2)
     OnFunctionCount(1)
@@ -252,7 +268,7 @@ BeginModule(version: 1)
   EndFunctionSection
   BeginTableSection(4)
     OnTableCount(1)
-    OnTable(index: 0, elem_type: anyfunc, initial: 0)
+    OnTable(index: 0, elem_type: funcref, initial: 0)
   EndTableSection
   BeginMemorySection(3)
     OnMemoryCount(1)
@@ -265,7 +281,7 @@ BeginModule(version: 1)
   EndExportSection
   BeginCodeSection(34)
     OnFunctionBodyCount(1)
-    BeginFunctionBody(0)
+    BeginFunctionBody(0, size:32)
     OnLocalDeclCount(1)
     OnLocalDecl(index: 0, count: 2, type: i32)
     OnI32ConstExpr(1 (0x1))
@@ -273,28 +289,30 @@ BeginModule(version: 1)
     OnBinaryExpr("i32.add" (106))
     OnI32ConstExpr(3 (0x3))
     OnBinaryExpr("i32.mul" (108))
-    OnSetLocalExpr(index: 0)
+    OnLocalSetExpr(index: 0)
     OnI32ConstExpr(2 (0x2))
     OnI32ConstExpr(3 (0x3))
-    OnGetLocalExpr(index: 0)
+    OnLocalGetExpr(index: 0)
     OnBinaryExpr("i32.mul" (108))
     OnBinaryExpr("i32.add" (106))
-    OnSetLocalExpr(index: 1)
-    OnGetLocalExpr(index: 1)
+    OnLocalSetExpr(index: 1)
+    OnLocalGetExpr(index: 1)
     OnI32ConstExpr(100 (0x64))
     OnBinaryExpr("i32.add" (106))
-    OnTeeLocalExpr(index: 0)
+    OnLocalTeeExpr(index: 0)
     EndFunctionBody(0)
   EndCodeSection
 EndModule
+Total opcodes: 17
+
 Opcode counts:
 i32.const: 6
 i32.add: 3
-get_local: 2
-set_local: 2
+local.get: 2
+local.set: 2
 i32.mul: 2
 end: 1
-tee_local: 1
+local.tee: 1
 
 Opcode counts with immediates:
 i32.add: 3
@@ -302,11 +320,11 @@ i32.const 2 (0x2): 2
 i32.const 3 (0x3): 2
 i32.mul: 2
 end: 1
-get_local 0: 1
-get_local 1: 1
-set_local 0: 1
-set_local 1: 1
-tee_local 0: 1
+local.get 0: 1
+local.get 1: 1
+local.set 0: 1
+local.set 1: 1
+local.tee 0: 1
 i32.const 1 (0x1): 1
 i32.const 100 (0x64): 1
 ```
@@ -377,18 +395,18 @@ typedef struct tp_wasm_module_content_{
     i32.add
     i32.const 3
     i32.mul
-    set_local 0
+    local.set 0
     i32.const 2
     i32.const 3
-    get_local 0
+    local.get 0
     i32.mul
     i32.add
-    set_local 1
-    get_local 1
+    local.set 1
+    local.get 1
     i32.const 100
     i32.add
-    tee_local 0)
-  (table (;0;) 0 anyfunc)
+    local.tee 0)
+  (table (;0;) 0 funcref)
   (memory (;0;) 1)
   (export "memory" (memory 0))
   (export "calc" (func 0)))

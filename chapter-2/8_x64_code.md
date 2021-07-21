@@ -185,18 +185,18 @@ value1 = value2 + 100;
     i32.add
     i32.const 3
     i32.mul
-    set_local 0
+    local.set 0
     i32.const 2
     i32.const 3
-    get_local 0
+    local.get 0
     i32.mul
     i32.add
-    set_local 1
-    get_local 1
+    local.set 1
+    local.get 1
     i32.const 100
     i32.add
-    tee_local 0)
-  (table (;0;) 0 anyfunc)
+    local.tee 0)
+  (table (;0;) 0 funcref)
   (memory (;0;) 1)
   (export "memory" (memory 0))
   (export "calc" (func 0)))
@@ -215,28 +215,29 @@ int_calc.bin:     file format binary
 Disassembly of section .data:
 
 00000000 <.data>:
-   0:   55                      push   rbp
-   1:   48 81 ec 50 00 00 00    sub    rsp,0x50
-   8:   48 8d 6c 24 20          lea    rbp,[rsp+0x20]
-   d:   b8 01 00 00 00          mov    eax,0x1
-  12:   b9 02 00 00 00          mov    ecx,0x2
-  17:   03 c1                   add    eax,ecx
-  19:   b9 03 00 00 00          mov    ecx,0x3
-  1e:   f7 e9                   imul   ecx
-  20:   89 44 25 00             mov    DWORD PTR [rbp+riz*1+0x0],eax
-  24:   b8 02 00 00 00          mov    eax,0x2
-  29:   b9 03 00 00 00          mov    ecx,0x3
-  2e:   8b 54 25 00             mov    edx,DWORD PTR [rbp+riz*1+0x0]
-  32:   0f af ca                imul   ecx,edx
-  35:   03 c1                   add    eax,ecx
-  37:   89 44 25 04             mov    DWORD PTR [rbp+riz*1+0x4],eax
-  3b:   8b 44 25 04             mov    eax,DWORD PTR [rbp+riz*1+0x4]
-  3f:   b9 64 00 00 00          mov    ecx,0x64
-  44:   03 c1                   add    eax,ecx
-  46:   89 44 25 00             mov    DWORD PTR [rbp+riz*1+0x0],eax
-  4a:   48 81 c4 50 00 00 00    add    rsp,0x50
-  51:   5d                      pop    rbp
-  52:   c3                      ret
+   0:	55                   	push   rbp
+   1:	48 81 ec 58 00 00 00 	sub    rsp,0x58
+   8:	48 8d 6c 24 20       	lea    rbp,[rsp+0x20]
+   d:	b8 01 00 00 00       	mov    eax,0x1
+  12:	b9 02 00 00 00       	mov    ecx,0x2
+  17:	03 c1                	add    eax,ecx
+  19:	b9 03 00 00 00       	mov    ecx,0x3
+  1e:	f7 e9                	imul   ecx
+  20:	89 44 25 00          	mov    DWORD PTR [rbp+riz*1+0x0],eax
+  24:	b8 02 00 00 00       	mov    eax,0x2
+  29:	b9 03 00 00 00       	mov    ecx,0x3
+  2e:	8b 54 25 00          	mov    edx,DWORD PTR [rbp+riz*1+0x0]
+  32:	0f af ca             	imul   ecx,edx
+  35:	03 c1                	add    eax,ecx
+  37:	89 44 25 04          	mov    DWORD PTR [rbp+riz*1+0x4],eax
+  3b:	8b 44 25 04          	mov    eax,DWORD PTR [rbp+riz*1+0x4]
+  3f:	b9 64 00 00 00       	mov    ecx,0x64
+  44:	03 c1                	add    eax,ecx
+  46:	89 44 25 00          	mov    DWORD PTR [rbp+riz*1+0x0],eax
+  4a:	8b 44 25 00          	mov    eax,DWORD PTR [rbp+riz*1+0x0]
+  4e:	48 81 c4 58 00 00 00 	add    rsp,0x58
+  55:	5d                   	pop    rbp
+  56:	c3                   	ret    
 ```
 
 例として、以下のようなソースコードをコンパイルしてみます。
@@ -444,7 +445,9 @@ int32_t tp_decode_si32leb128(uint8_t* buffer, uint32_t* size)
 
     if (byte & 0x40){
 
-        value |= (-1 << shift);
+        uint64_t init_value = -1;
+
+        value |= (init_value << shift);
     }
 
     *size = (uint32_t)(p - buffer);
@@ -481,8 +484,8 @@ uint32_t tp_decode_ui32leb128(uint8_t* buffer, uint32_t* size)
 C 言語の関数の始まりの部分に相当します。機械語では、CPU にあるレジスタという変数のようなものを使って、計算したりメモリ上の値を操作したりします。
 x64 のレジスタやスタックの操作に関するルールは、基本的に x64 版の UEFI でも使われている x64 ソフトウェア規約に従います。Linux などの POSIX 環境とはルールが異なります。
 
-x64 ソフトウェア規約 | Microsoft Docs  
-https://docs.microsoft.com/ja-jp/cpp/build/x64-software-conventions?view=vs-2017
+x64 でのソフトウェア規約 | Microsoft Docs  
+https://docs.microsoft.com/ja-jp/cpp/build/x64-software-conventions?view=msvc-160&viewFallbackFrom=vs-2017
 
 ```
   RSP, RBP レジスタは 64 ビット利用。その他の 14 個の 64 ビット汎用レジスタの下位 32 ビットを利用
@@ -516,6 +519,7 @@ SUB 命令の即値オペランドのサイズは 4 バイト固定にします�
 x64 では、関数呼び出しを行ったり SSE 命令を利用したりする場合に、関数のスタック・サイズが 16 の倍数バイトであることが求められます。
 アライメントと呼ばれるデータ配置の決まりです。「16 バイト境界でアラインされる」などと言います。
 以下の各領域のサイズが 16 の倍数バイトになるように、各領域ごとに 0 バイト以上の padding 領域を確保します。
+ただし、呼び出し元のリターン・アドレス 8 バイト分の差異を埋めるため、スタック終端に 8 バイトの padding 領域を確保する必要がある場合があります。
 
 * ローカル変数の領域
 * 一時変数の領域
@@ -536,6 +540,7 @@ x64 では、関数呼び出しを行ったり SSE 命令を利用したりす�
     ローカル変数の領域の padding
     ローカル変数の領域(4 * n)
     この章では未使用：関数呼び出しのための 64 ビット引数レジスタ 4 個分の領域(8 * 4 = 32)
+    スタック終端の padding：ゼロまたは 8 バイト(計算した関数のスタック・サイズ % 16) が 0 の場合は 8、それ以外は 0)
   低位アドレス
 
 padding の計算式： ( -「padding を必要とする領域のバイト数」) & (16 - 1)
@@ -548,21 +553,22 @@ padding の計算式： ( -「padding を必要とする領域のバイト数」
 3. x64 のスタック領域を確保するため、RSP レジスタから x64 の SUB 命令で関数のスタック・サイズを減算しますが、
 即値オペランドのサイズが、padding バイトの確保前と確保後で 1 バイト になったり 4 バイトになったりする可能性を排除するため、関数のスタック・サイズは 4 バイト固定にします。
 
-関数のスタック・サイズの内訳は、デバッグ用途のために int_calc_log.log ファイルに出力されます。スタック・サイズ member_stack_imm32 が 80 なので、16 で割り切れるため正常です。
+関数のスタック・サイズの内訳は、デバッグ用途のために int_calc_log.log ファイルに出力されます。スタック・サイズ member_stack_imm32 が 88 なので、16 で割った余りが 8 のため正常です。
 
 ```
-tp_make_x64_code_body.c(174): sub rsp, imm32
-symbol_table->member_stack_imm32: 80
-symbol_table->member_local_variable_size: 8
-symbol_table->member_padding_local_variable_bytes: 8
-symbol_table->member_temporary_variable_size: 32
-symbol_table->member_padding_temporary_variable_bytes: 0
-symbol_table->member_register_bytes: 0
+tp_make_x64_code_body.c(211): sub rsp, imm32
+symbol_table->member_stack_imm32(member_register_bytes is not included): 88
+symbol_table->member_register_bytes: 16
 symbol_table->member_padding_register_bytes: 0
+symbol_table->member_temporary_variable_size: 36
+symbol_table->member_padding_temporary_variable_bytes: 0
+symbol_table->member_local_variable_size: 8
+symbol_table->member_padding_local_variable_bytes: 4
+symbol_table->member_last_padding_bytes: 8
 stack_param_size: 32
 ```
 
-Windows アプリで、サイズの大きいスタック領域を確保する場合、アプリからアクセス可能なスタック領域であることを検査するヘルパー関数が必要です。次章で説明します。
+Windows アプリで、サイズの大きいスタック領域を確保する場合、アプリからアクセス可能なスタック領域であることを検査するヘルパー関数が必要です。第5章で説明します。
 
 ### 2.8.7 レジスタの割り当てと解放
 
@@ -727,28 +733,29 @@ int_calc.bin:     file format binary
 Disassembly of section .data:
 
 00000000 <.data>:
-   0:   55                      push   rbp
-   1:   48 81 ec 50 00 00 00    sub    rsp,0x50
-   8:   48 8d 6c 24 20          lea    rbp,[rsp+0x20]
-   d:   b8 01 00 00 00          mov    eax,0x1
-  12:   b9 02 00 00 00          mov    ecx,0x2
-  17:   03 c1                   add    eax,ecx
-  19:   b9 03 00 00 00          mov    ecx,0x3
-  1e:   f7 e9                   imul   ecx
-  20:   89 44 25 00             mov    DWORD PTR [rbp+riz*1+0x0],eax
-  24:   b8 02 00 00 00          mov    eax,0x2
-  29:   b9 03 00 00 00          mov    ecx,0x3
-  2e:   8b 54 25 00             mov    edx,DWORD PTR [rbp+riz*1+0x0]
-  32:   0f af ca                imul   ecx,edx
-  35:   03 c1                   add    eax,ecx
-  37:   89 44 25 04             mov    DWORD PTR [rbp+riz*1+0x4],eax
-  3b:   8b 44 25 04             mov    eax,DWORD PTR [rbp+riz*1+0x4]
-  3f:   b9 64 00 00 00          mov    ecx,0x64
-  44:   03 c1                   add    eax,ecx
-  46:   89 44 25 00             mov    DWORD PTR [rbp+riz*1+0x0],eax
-  4a:   48 81 c4 50 00 00 00    add    rsp,0x50
-  51:   5d                      pop    rbp
-  52:   c3                      ret
+   0:	55                   	push   rbp
+   1:	48 81 ec 58 00 00 00 	sub    rsp,0x58
+   8:	48 8d 6c 24 20       	lea    rbp,[rsp+0x20]
+   d:	b8 01 00 00 00       	mov    eax,0x1
+  12:	b9 02 00 00 00       	mov    ecx,0x2
+  17:	03 c1                	add    eax,ecx
+  19:	b9 03 00 00 00       	mov    ecx,0x3
+  1e:	f7 e9                	imul   ecx
+  20:	89 44 25 00          	mov    DWORD PTR [rbp+riz*1+0x0],eax
+  24:	b8 02 00 00 00       	mov    eax,0x2
+  29:	b9 03 00 00 00       	mov    ecx,0x3
+  2e:	8b 54 25 00          	mov    edx,DWORD PTR [rbp+riz*1+0x0]
+  32:	0f af ca             	imul   ecx,edx
+  35:	03 c1                	add    eax,ecx
+  37:	89 44 25 04          	mov    DWORD PTR [rbp+riz*1+0x4],eax
+  3b:	8b 44 25 04          	mov    eax,DWORD PTR [rbp+riz*1+0x4]
+  3f:	b9 64 00 00 00       	mov    ecx,0x64
+  44:	03 c1                	add    eax,ecx
+  46:	89 44 25 00          	mov    DWORD PTR [rbp+riz*1+0x0],eax
+  4a:	8b 44 25 00          	mov    eax,DWORD PTR [rbp+riz*1+0x0]
+  4e:	48 81 c4 58 00 00 00 	add    rsp,0x58
+  55:	5d                   	pop    rbp
+  56:	c3                   	ret    
 ```
 
 符号付き除算の IDIV 命令で、「ローカル変数 = ローカル変数 / レジスタ」または、

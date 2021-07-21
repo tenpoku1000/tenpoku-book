@@ -8,7 +8,7 @@
 https://moneyforward.com/engineers_blog/2017/04/13/ruby-core-201703/
 
 引退するメインフレームプログラマたち - その対策は？  
-https://www.infoq.com/jp/articles/retiring-mainframe-programmers
+https://www.infoq.com/jp/articles/retiring-mainframe-programmers/
 
 ### [2.4 字句解析](chapter-2/4_Token.md)・[2.5 構文解析](chapter-2/5_Parse_tree.md)・[2.6 意味解析](chapter-2/6_Semantic_analysis.md)
 
@@ -46,6 +46,12 @@ https://moneyforward.com/engineers_blog/2016/12/01/ruby-core-201611/
 
 ### [2.7 中間コード(WebAssembly)生成](chapter-2/7_Wasm.md)
 
+スタックマシンの記事を読むためには、Web ブラウザのエンコーディングを日本語(EUC-JP)に切り替える必要がある場合があります。
+Google Chrome や Microsoft Edge では以下の拡張機能が使えます。
+
+テキストエンコーディング - Chrome ウェブストア  
+https://chrome.google.com/webstore/detail/set-character-encoding/bpojelgakakmcfmjfilgdlmhefphglae/related?hl=ja
+
 スタックマシン - プログラミング言語処理  
 http://www.hpcs.cs.tsukuba.ac.jp/~msato/lecture-note/comp-lecture/note8.html
 
@@ -55,8 +61,8 @@ http://www.hpcs.cs.tsukuba.ac.jp/~msato/lecture-note/comp-lecture/note9.html
 WebAssembly Specifications  
 https://webassembly.github.io/spec/
 
-Binary Encoding - WebAssembly  
-https://webassembly.org/docs/binary-encoding/
+Binary Format — WebAssembly  
+https://webassembly.github.io/spec/core/binary/index.html
 
 WebAssembly/wabt: The WebAssembly Binary Toolkit  
 https://github.com/WebAssembly/wabt
@@ -107,17 +113,17 @@ https://gist.github.com/tenpoku1000/24c249e32c512611c079ce87a59a6a52
 湯淺 太一  
 オーム社 2014/09
 
-x64 ソフトウェア規約 | Microsoft Docs  
-https://docs.microsoft.com/ja-jp/cpp/build/x64-software-conventions?view=vs-2017
+x64 でのソフトウェア規約 | Microsoft Docs  
+https://docs.microsoft.com/ja-jp/cpp/build/x64-software-conventions?view=msvc-160&viewFallbackFrom=vs-2017
 
-x64 呼び出し規則 | Microsoft Docs  
-https://docs.microsoft.com/ja-jp/cpp/build/x64-calling-convention?view=vs-2017
+x64 での呼び出し規則 | Microsoft Docs  
+https://docs.microsoft.com/ja-jp/cpp/build/x64-calling-convention?view=msvc-160&viewFallbackFrom=vs-2017
 
-x64 スタック使用量 | Microsoft Docs  
-https://docs.microsoft.com/ja-jp/cpp/build/stack-usage?view=vs-2017
+x64 でのスタックの使用 | Microsoft Docs  
+https://docs.microsoft.com/ja-jp/cpp/build/stack-usage?view=msvc-160&viewFallbackFrom=vs-2017
 
-プロローグとエピローグ | Microsoft Docs  
-https://docs.microsoft.com/ja-jp/cpp/build/prolog-and-epilog?view=vs-2017
+x64 でのプロローグとエピローグ | Microsoft Docs  
+https://docs.microsoft.com/ja-jp/cpp/build/prolog-and-epilog?view=msvc-160&viewFallbackFrom=vs-2017
 
 Gamasutra - In-depth: Windows x64 ABI: Stack frames  
 https://www.gamasutra.com/view/news/178446/Indepth_Windows_x64_ABI_Stack_frames.php
@@ -140,8 +146,8 @@ Jr.,Henry S. Warren 著
 翻訳：滝沢 徹, 鈴木 貢, 赤池 英夫, 葛 毅, 藤波 順久  
 エスアイビー・アクセス 2005/06 初版 第3刷
 
-linux - How do I disassemble raw x86 code? - Stack Overflow  
-https://stackoverflow.com/questions/1737095/how-do-i-disassemble-raw-x86-code/34424146
+linux - How do I disassemble raw 16-bit x86 machine code? - Stack Overflow  
+https://stackoverflow.com/questions/1737095/how-do-i-disassemble-raw-16-bit-x86-machine-code/34424146#34424146
 
 Writing WebAssembly By Hand  
 https://blog.scottlogic.com/2018/04/26/webassembly-by-hand.html
@@ -193,5 +199,5 @@ Volume 2 (2A, 2B, 2C & 2D): Instruction Set Reference, A-Z rev.067 May 2018
 ### [2.9 デバッグとテストコード](chapter-2/9_Debug_test.md)
 
 引退するメインフレームプログラマたち - その対策は？  
-https://www.infoq.com/jp/articles/retiring-mainframe-programmers
+https://www.infoq.com/jp/articles/retiring-mainframe-programmers/
 
